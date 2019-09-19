@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin_manifest xmlns="http://www.elgg.org/plugin_manifest/1.8">
+	<name>SAML SSO</name>
+	<author>ColdTrick IT Solutions</author>
+	<version>1.0</version>
+	<id>saml_sso</id>
+	<description>Provides SAML 2.0 based Single Sign On features for Elgg based on the OneLogin SAML library.</description>
+	<website>http://www.coldtrick.com/</website>
+	<repository>https://github.com/ColdTrick/saml_sso</repository>
+	<bugtracker>https://github.com/ColdTrick/saml_sso/issues</bugtracker>
+	<copyright>(C) ColdTrick IT Solutions 2019</copyright>
+	<license>GNU General Public License version 2</license>
+ 	
+ 	<requires>
+		<type>elgg_release</type>
+		<version>3.1</version>
+	</requires>
+	
+	<category>ColdTrick</category>
+</plugin_manifest>
