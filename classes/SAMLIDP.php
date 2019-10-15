@@ -19,6 +19,13 @@ class SAMLIDP extends ElggObject {
 	}
 	
 	/**
+	 * {@inheritDoc}
+	 */
+	public function getURL() {
+		return elgg_generate_entity_url($this, 'metadata');
+	}
+	
+	/**
 	 * Returns an id for use in links and config
 	 *
 	 * @return string
@@ -97,6 +104,24 @@ class SAMLIDP extends ElggObject {
 	}
 	
 	protected function getIDPSettings() {
-		return unserialize($this->settings);
+		$settings = $this->settings;
+		if (!empty($settings)) {
+			return unserialize($this->settings);
+		}
+		
+		$result = [
+			'entityId' => $this->getIDPID(),
+			'singleSignOnService' => [
+				'url' => $this->sso_url,
+			],
+		];
+		
+		if (!empty($this->slo_url)) {
+			$result['singleLogoutService'] = [
+				'url' => $this->slo_url,
+			];
+		}
+		
+		return $result;
 	}
 }

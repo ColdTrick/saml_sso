@@ -15,11 +15,12 @@ return [
 	],
 	'routes' => [
 		'login:object:saml_idp' => [
-			'path' => 'saml_idp/login/{guid}',
+			'path' => 'saml_idp/login/{idpid}',
 			'controller' => ColdTrick\SAMLSSO\Controller\SSO::class,
 			'middleware' => [
 				LoggedOutGatekeeper::class,
 			],
+			'walled' => false,
 		],
 		'acs:object:saml_idp' => [
 			'path' => 'saml_idp/acs/{guid}',
@@ -27,6 +28,7 @@ return [
 			'middleware' => [
 				LoggedOutGatekeeper::class,
 			],
+			'walled' => false,
 		],
 		'logout:object:saml_idp' => [
 			'path' => 'saml_idp/logout/{guid}',
@@ -38,6 +40,7 @@ return [
 		'metadata:object:saml_idp' => [
 			'path' => 'saml_idp/metadata/{guid}',
 			'controller' => ColdTrick\SAMLSSO\Controller\Metadata::class,
+			'walled' => false,
 		],
 	],
 	'hooks' => [

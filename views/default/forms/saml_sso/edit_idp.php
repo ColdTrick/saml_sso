@@ -48,8 +48,6 @@ echo elgg_view_field([
 	'value' => $entity ? $entity->private_key : null,
 ]);
 
-var_dump($entity->getSettings());
-
 $footer = elgg_view_field([
 	'#type' => 'submit',
 	'value' => elgg_echo('save'),
