@@ -15,7 +15,7 @@ return [
 	],
 	'routes' => [
 		'login:object:saml_idp' => [
-			'path' => 'saml_idp/login/{idpid}',
+			'path' => 'saml_idp/login/{guid}',
 			'controller' => ColdTrick\SAMLSSO\Controller\SSO::class,
 			'middleware' => [
 				LoggedOutGatekeeper::class,

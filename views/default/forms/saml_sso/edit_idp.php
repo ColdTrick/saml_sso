@@ -34,7 +34,6 @@ echo elgg_view_field([
 echo elgg_view_field([
 	'#type' => 'plaintext',
 	'#label' => elgg_echo('saml_sso:saml_idp:x509cert'),
-	'required' => true,
 	'name' => 'x509cert',
 	'rows' => 3,
 	'value' => $entity ? $entity->x509cert : null,

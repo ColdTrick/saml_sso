@@ -25,8 +25,9 @@ class Metadata {
 		} catch (\Exception $e) {
 			return new ErrorResponse($e->getMessage());
 		}
-	
-		header('Content-Type: text/xml');
+		
+		// need to set charset because OneLogin generates xml without encoding set explicitely
+		header('Content-Type: text/xml; charset=ISO-8859-1');
 		return elgg_ok_response($metadata);
 	}
 }

@@ -1,5 +1,7 @@
 <?php
 
+use OneLogin\Saml2\Constants;
+
 class SAMLIDP extends ElggObject {
 	
 	const SUBTYPE = 'saml_idp';
@@ -53,7 +55,7 @@ class SAMLIDP extends ElggObject {
 	}
 	
 	protected function getSPSettings() {
-		return [
+		$result = [
 			 // Identifier of the SP entity  (must be a URI)
 	        'entityId' => elgg_generate_entity_url($this, 'metadata'),
 	        // Specifies info about where and how the <AuthnResponse> message MUST be
@@ -95,12 +97,22 @@ class SAMLIDP extends ElggObject {
 	        // Specifies the constraints on the name identifier to be used to
 	        // represent the requested subject.
 	        // Take a look on lib/Saml2/Constants.php to see the NameIdFormat supported.
-	        'NameIDFormat' => 'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress',
+	        'NameIDFormat' => Constants::NAMEID_UNSPECIFIED,
 	        // Usually x509cert and privateKey of the SP are provided by files placed at
 	        // the certs folder. But we can also provide them with the following parameters
 // 	        'x509cert' => '',
 // 	        'privateKey' => '',
 		];
+		
+		if ($this->x509cert) {
+			$result['x509cert'] = $this->x509cert;
+		}
+		
+		if ($this->private_key) {
+			$result['privateKey'] = $this->private_key;
+		}
+		
+		return $result;
 	}
 	
 	protected function getIDPSettings() {
