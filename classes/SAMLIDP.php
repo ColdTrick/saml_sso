@@ -45,7 +45,9 @@ class SAMLIDP extends ElggObject {
 		return [
 		    // Enable debug mode (to print errors).
 		    'debug' => false,
-		
+			'security' => [
+				'requestedAuthnContext' => false,
+			],
 		    // Service Provider Data that we are deploying.
 		    'sp' => $this->getSPSettings(),
 		
