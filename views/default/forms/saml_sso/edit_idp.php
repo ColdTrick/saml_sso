@@ -16,20 +16,25 @@ echo elgg_view_field([
 	'value' => $entity ? $entity->title : null,
 ]);
 
-echo elgg_view_field([
-	'#type' => 'url',
-	'#label' => elgg_echo('saml_sso:saml_idp:sso_url'),
-	'required' => true,
-	'name' => 'sso_url',
-	'value' => $entity ? $entity->sso_url : null,
-]);
-
-echo elgg_view_field([
-	'#type' => 'url',
-	'#label' => elgg_echo('saml_sso:saml_idp:slo_url'),
-	'name' => 'slo_url',
-	'value' => $entity ? $entity->slo_url : null,
-]);
+if ($entity && $entity->settings) {
+	echo elgg_format_element('pre', [], var_export(unserialize($entity->settings), true));
+	
+} else {
+	echo elgg_view_field([
+		'#type' => 'url',
+		'#label' => elgg_echo('saml_sso:saml_idp:sso_url'),
+		'required' => true,
+		'name' => 'sso_url',
+		'value' => $entity ? $entity->sso_url : null,
+	]);
+	
+	echo elgg_view_field([
+		'#type' => 'url',
+		'#label' => elgg_echo('saml_sso:saml_idp:slo_url'),
+		'name' => 'slo_url',
+		'value' => $entity ? $entity->slo_url : null,
+	]);
+}
 
 echo elgg_view_field([
 	'#type' => 'plaintext',
