@@ -23,22 +23,7 @@ class ACS {
             }
             
             login($user, true);
-            
-			
-// 			$attributes = $response->getAttributes();
-//             if (!empty($attributes)) {
-//                 $content .= 'You have the following attributes:<br>';
-//                 $content .= '<table><thead><th>Name</th><th>Values</th></thead><tbody>';
-//                 foreach ($attributes as $attributeName => $attributeValues) {
-//                     $content .= '<tr><td>' . htmlentities($attributeName) . '</td><td><ul>';
-//                     foreach ($attributeValues as $attributeValue) {
-//                         $content .= '<li>' . htmlentities($attributeValue) . '</li>';
-//                     }
-//                     $content .= '</ul></td></tr>';
-//                 }
-//                 $content .= '</tbody></table>';
-//             }
-            
+             
 			$forward = $request->getParam('RelayState', '/', false);
             return elgg_redirect_response($forward);
             

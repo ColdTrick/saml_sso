@@ -70,22 +70,6 @@ class SAMLIDP extends ElggObject {
 	            // HTTP-POST binding only.
 	            'binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST',
 	        ),
-	        // If you need to specify requested attributes, set a
-	        // attributeConsumingService. nameFormat, attributeValue and
-	        // friendlyName can be omitted
-// 	        "attributeConsumingService"=> array(
-// 	                "serviceName" => "SP test",
-// 	                "serviceDescription" => "Test Service",
-// 	                "requestedAttributes" => array(
-// 	                    array(
-// 	                        "name" => "",
-// 	                        "isRequired" => false,
-// 	                        "nameFormat" => "",
-// 	                        "friendlyName" => "",
-// 	                        "attributeValue" => array()
-// 	                    )
-// 	                )
-// 	        ),
 	        // Specifies info about where and how the <Logout Response> message MUST be
 	        // returned to the requester, in this case our SP.
 	        'singleLogoutService' => array (
@@ -100,10 +84,6 @@ class SAMLIDP extends ElggObject {
 	        // represent the requested subject.
 	        // Take a look on lib/Saml2/Constants.php to see the NameIdFormat supported.
 	        'NameIDFormat' => Constants::NAMEID_UNSPECIFIED,
-	        // Usually x509cert and privateKey of the SP are provided by files placed at
-	        // the certs folder. But we can also provide them with the following parameters
-// 	        'x509cert' => '',
-// 	        'privateKey' => '',
 		];
 		
 		if ($this->x509cert) {
