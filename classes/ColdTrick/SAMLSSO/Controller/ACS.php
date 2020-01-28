@@ -14,11 +14,13 @@ class ACS {
 			$settings = new \OneLogin\Saml2\Settings($entity->getSettings());
 			$response = new \OneLogin\Saml2\Response($settings, $request->getParam('SAMLResponse', null, false));
 			if (!$response->isValid()) {
+				elgg_get_session()->set('disable_sso', true);
 				return new ErrorResponse($response->getError());
 			}
 			
 		 	$user = get_user_by_username($response->getNameId());
             if (empty($user)) {
+            	elgg_get_session()->set('disable_sso', true);
             	return new ErrorResponse(elgg_echo('login:baduser'));
             }
             
@@ -28,6 +30,7 @@ class ACS {
             return elgg_redirect_response($forward);
             
 		} catch (\Exception $e) {
+			elgg_get_session()->set('disable_sso', true);
 			return new ErrorResponse($e->getMessage());
 		}
 		
