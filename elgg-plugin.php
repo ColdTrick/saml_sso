@@ -6,6 +6,9 @@ use Elgg\Router\Middleware\LoggedOutGatekeeper;
 
 return [
 	'bootstrap' => Bootstrap::class,
+	'settings' => [
+		'use_http_x_forwarded' => 0,
+	],
 	'entities' => [
 		[
 			'type' => 'object',

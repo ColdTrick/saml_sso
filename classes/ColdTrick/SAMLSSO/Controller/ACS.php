@@ -11,6 +11,9 @@ class ACS {
 		elgg_entity_gatekeeper($entity->guid, 'object', 'saml_idp');
 		
 		try {
+			// set static usage of proxy vars
+			\OneLogin\Saml2\Utils::setProxyVars((bool) elgg_get_plugin_setting('use_http_x_forwarded', 'saml_sso'));
+			
 			$settings = new \OneLogin\Saml2\Settings($entity->getSettings());
 			$response = new \OneLogin\Saml2\Response($settings, $request->getParam('SAMLResponse', null, false));
 			if (!$response->isValid()) {

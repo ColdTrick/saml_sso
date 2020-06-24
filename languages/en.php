@@ -3,6 +3,9 @@
 return [
 	'admin:configure_utilities:manage_idps' => "Manage SAML IDPs",
 	
+	'saml_sso:settings:use_http_x_forwarded' => "Use proxy variables",
+	'saml_sso:settings:use_http_x_forwarded:help' => "Allow the usage of HTTP_X_FORWARDED server information",
+	
 	'add:object:saml_idp' => "Create IDP",
 	'add:object:saml_idp:from_xml' => "Create IDP from XML",
 	
