@@ -44,7 +44,7 @@ class SAMLIDP extends ElggObject {
 	public function getSettings() {
 		return [
 		    // Enable debug mode (to print errors).
-		    'debug' => false,
+		    'debug' => !empty(elgg_get_config('debug')),
 			'security' => [
 				'requestedAuthnContext' => false,
 			],
