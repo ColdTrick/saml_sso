@@ -88,6 +88,10 @@ class Menus {
 		$return = $hook->getValue();
 		
 		foreach ($entities as $entity) {
+			if (!$entity->showOnLoginForm()) {
+				continue;
+			}
+			
 			$id = $entity->getIDPID();
 			$return[] = \ElggMenuItem::factory([
 				'name' => "login_{$id}",

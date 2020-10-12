@@ -37,6 +37,15 @@ class SAMLIDP extends ElggObject {
 	}
 	
 	/**
+	 * Checks if this IDP should show on the login form
+	 *
+	 * @return bool
+	 */
+	public function showOnLoginForm() {
+		return $this->show_on_login_form !== 0;
+	}
+	
+	/**
 	 * Return an SAML settings array
 	 *
 	 * @return array

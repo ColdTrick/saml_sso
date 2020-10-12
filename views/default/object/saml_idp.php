@@ -23,6 +23,7 @@ $params = [
 	'byline' => false,
 	'access' => false,
 	'imprint' => $imprint,
+	'content' => $entity->description,
 ];
 $params = $params + $vars;
 echo elgg_view('object/elements/summary', $params);

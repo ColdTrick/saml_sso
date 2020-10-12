@@ -16,6 +16,14 @@ echo elgg_view_field([
 	'value' => $entity ? $entity->title : null,
 ]);
 
+echo elgg_view_field([
+	'#type' => 'plaintext',
+	'#label' => elgg_echo('description'),
+	'name' => 'description',
+	'value' => $entity ? $entity->description : null,
+	'rows' => 3,
+]);
+
 if ($entity && $entity->settings) {
 	echo elgg_format_element('pre', [], var_export(unserialize($entity->settings), true));
 	
@@ -50,6 +58,16 @@ echo elgg_view_field([
 	'name' => 'private_key',
 	'rows' => 3,
 	'value' => $entity ? $entity->private_key : null,
+]);
+
+echo elgg_view_field([
+	'#type' => 'checkbox',
+	'#label' => elgg_echo('saml_sso:saml_idp:show_on_login_form'),
+	'name' => 'show_on_login_form',
+	'checked' => $entity->show_on_login_form !== 0,
+	'switch' => true,
+	'default' => 0,
+	'value' => 1,
 ]);
 
 $footer = elgg_view_field([
