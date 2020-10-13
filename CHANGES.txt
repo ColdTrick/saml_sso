@@ -1,6 +1,12 @@
 Version history
 ===============
 
+1.0 (2020-10-13):
+
+- added: feature to configure if IDP should show up on login form
+- added: support for digesting proxyvars for URL detection
+- changed: debug flag is set based on config value
+
 0.3 (2020-02-04):
 
 - fixed: don't keep redirecting if IDP provides unknown user details
