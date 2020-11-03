@@ -28,9 +28,6 @@ return [
 		'acs:object:saml_idp' => [
 			'path' => 'saml_idp/acs/{guid}',
 			'controller' => ColdTrick\SAMLSSO\Controller\ACS::class,
-			'middleware' => [
-				LoggedOutGatekeeper::class,
-			],
 			'walled' => false,
 		],
 		'logout:object:saml_idp' => [

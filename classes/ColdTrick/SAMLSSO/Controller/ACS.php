@@ -10,6 +10,12 @@ class ACS {
 		$entity = $request->getEntityParam();
 		elgg_entity_gatekeeper($entity->guid, 'object', 'saml_idp');
 		
+		// edge case where SSO proces kicks in but there is already a logged in user
+		if (elgg_is_logged_in()) {
+			$forward = $request->getParam('RelayState', '/', false);
+            return elgg_redirect_response($forward);
+		}
+		
 		try {
 			// set static usage of proxy vars
 			\OneLogin\Saml2\Utils::setProxyVars((bool) elgg_get_plugin_setting('use_http_x_forwarded', 'saml_sso'));
