@@ -1,11 +1,12 @@
 <?php
 
-use ColdTrick\SAMLSSO\Bootstrap;
 use Elgg\Router\Middleware\Gatekeeper;
 use Elgg\Router\Middleware\LoggedOutGatekeeper;
 
 return [
-	'bootstrap' => Bootstrap::class,
+	'plugin' => [
+		'version' => '1.0.1',
+	],
 	'settings' => [
 		'use_http_x_forwarded' => 0,
 	],
@@ -66,5 +67,17 @@ return [
 		'saml_sso/force_authentication' => [
 			'access' => 'admin',
 		],
+	],
+	'view_extensions' => [
+		'page/default' => [
+			'saml_sso/force_authentication' => ['priority' => 200],
+		],
+		'page/walled_garden' => [
+			'saml_sso/force_authentication' => ['priority' => 200],
+		],
+	],
+	'view_options' => [
+		'forms/saml_sso/add_idp_from_xml' => ['ajax' => true],
+		'forms/saml_sso/edit_idp' => ['ajax' => true],
 	],
 ];

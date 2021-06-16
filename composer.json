@@ -1,6 +1,7 @@
 {
 	"name": "coldtrick/saml_sso",
 	"description": "Provides SAML 2.0 based Single Sign On features for Elgg based on the OneLogin SAML library.",
+	"homepage": "https://www.coldtrick.com",
 	"type": "elgg-plugin",
 	"keywords": ["elgg", "plugin", "sso"],
 	"license": "GPL-2.0-only",
@@ -10,13 +11,13 @@
 	},
 	"require": {
 		"composer/installers": "^1.0.8",
-		"onelogin/php-saml": "~3.3.0"
+		"onelogin/php-saml": "~4.0.0"
 	},
 	"require-dev": {
 		"coldtrick/sniffs": "dev-master",
 		"coldtrick/releases": "dev-master"
 	},
 	"conflict": {
-		"elgg/elgg": "<3.1"
+		"elgg/elgg": "<4.0"
 	}
 }
