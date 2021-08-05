@@ -1,6 +1,7 @@
 <?php
 
 return [
+	'item:object:saml_idp' => "SAML IDP configuration",
 	'admin:configure_utilities:manage_idps' => "Manage SAML IDPs",
 	
 	'saml_sso:settings:use_http_x_forwarded' => "Use proxy variables",
