@@ -4,12 +4,17 @@ use OneLogin\Saml2\IdPMetadataParser;
 
 $title = get_input('title');
 $url = get_input('url');
+$xml = get_input('xml', '', false);
+
+if (empty($url) && empty($xml)) {
+	return elgg_error_response(elgg_echo('error:missing_data'));
+}
 
 try {
 	if (!empty($url)) {
 		$settings = IdPMetadataParser::parseRemoteXML($url);
 	} else {
-		$settings = IdPMetadataParser::parseXML(get_input('xml', null, false));
+		$settings = IdPMetadataParser::parseXML($xml);
 	}
 } catch (Exception $e) {
 	return elgg_error_response($e->getMessage());
