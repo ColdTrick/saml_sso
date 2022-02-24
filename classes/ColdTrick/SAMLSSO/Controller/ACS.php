@@ -16,21 +16,27 @@ class ACS {
             return elgg_redirect_response($forward);
 		}
 		
+		$saml_response = $request->getParam('SAMLResponse', null, false);
+		if (empty($saml_response)) {
+			elgg_get_session()->set('disable_sso', true);
+			return elgg_error_response(elgg_echo('error:missing_data'));
+		}
+		
 		try {
 			// set static usage of proxy vars
 			\OneLogin\Saml2\Utils::setProxyVars((bool) elgg_get_plugin_setting('use_http_x_forwarded', 'saml_sso'));
 			
 			$settings = new \OneLogin\Saml2\Settings($entity->getSettings());
-			$response = new \OneLogin\Saml2\Response($settings, $request->getParam('SAMLResponse', null, false));
+			$response = new \OneLogin\Saml2\Response($settings, $saml_response);
 			if (!$response->isValid()) {
 				elgg_get_session()->set('disable_sso', true);
-				return new ErrorResponse($response->getError());
+				return elgg_error_response($response->getError());
 			}
 			
 		 	$user = get_user_by_username($response->getNameId());
             if (empty($user)) {
             	elgg_get_session()->set('disable_sso', true);
-            	return new ErrorResponse(elgg_echo('login:baduser'));
+            	return elgg_error_response(elgg_echo('login:baduser'));
             }
             
             login($user, true);
@@ -40,7 +46,7 @@ class ACS {
             
 		} catch (\Exception $e) {
 			elgg_get_session()->set('disable_sso', true);
-			return new ErrorResponse($e->getMessage());
+			return elgg_error_response($e->getMessage());
 		}
 		
 		return elgg_ok_response();
