@@ -1,6 +1,10 @@
 Version history
 ===============
 
+2.0.1 (2022-03-11):
+
+- fixed: validate xml or url input when adding idp from xml source
+
 2.0 (2021-09-27):
 
 - added: dutch translation
