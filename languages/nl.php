@@ -9,6 +9,8 @@ return array (
   'admin:configure_utilities:manage_idps' => 'Beheer SAML IDPs',
   'saml_sso:settings:use_http_x_forwarded' => 'Gebruik proxy variabelen',
   'saml_sso:settings:use_http_x_forwarded:help' => 'Sta het gebruik toe van de HTTP_X_FORWARDED server informatie',
+  'saml_sso:settings:disable_sso_on_logout' => 'SSO uitschakelen na afmelden',
+  'saml_sso:settings:disable_sso_on_logout:help' => 'Indien dit actief is zal er geen SSO geforceerd worden wanneer een gebruiker zich expliciet heeft afgemeld',
   'add:object:saml_idp' => 'Maak IDP',
   'add:object:saml_idp:from_xml' => 'Maak IDP obv XML',
   'saml_sso:add_from_xml:url' => 'Voer IDP metadata URL in voor autodetectie',

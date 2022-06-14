@@ -9,6 +9,7 @@ return [
 	],
 	'settings' => [
 		'use_http_x_forwarded' => 0,
+		'disable_sso_on_logout' => false,
 	],
 	'entities' => [
 		[
@@ -55,7 +56,12 @@ return [
 			'menu:page' => [
 				'\ColdTrick\SAMLSSO\Menus::registerAdminPageMenu' => [],
 			],
-		]
+		],
+		'response' => [
+			'action:logout' => [
+				'\ColdTrick\SAMLSSO\Logout::disableSso' => [],
+			],
+		],
 	],
 	'actions' => [
 		'saml_sso/add_idp_from_xml' => [
