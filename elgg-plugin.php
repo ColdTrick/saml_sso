@@ -5,7 +5,7 @@ use Elgg\Router\Middleware\LoggedOutGatekeeper;
 
 return [
 	'plugin' => [
-		'version' => '2.0.1',
+		'version' => '2.1',
 	],
 	'settings' => [
 		'use_http_x_forwarded' => 0,

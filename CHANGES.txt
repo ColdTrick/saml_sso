@@ -1,6 +1,10 @@
 Version history
 ===============
 
+2.1 (2022-06-22):
+
+- added: setting to disable forced sso on explicit logout action
+
 2.0.1 (2022-03-11):
 
 - fixed: validate xml or url input when adding idp from xml source
