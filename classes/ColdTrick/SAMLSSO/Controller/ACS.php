@@ -39,7 +39,7 @@ class ACS {
             	return elgg_error_response(elgg_echo('login:baduser'));
             }
             
-            login($user, true);
+            elgg_login($user, true);
              
 			$forward = $request->getParam('RelayState', '/', false);
             return elgg_redirect_response($forward);

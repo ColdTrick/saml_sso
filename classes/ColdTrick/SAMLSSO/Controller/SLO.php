@@ -7,7 +7,7 @@ class SLO {
 
 	public function __invoke(Request $request) {
 		
-		if (!logout()) {
+		if (!elgg_logout()) {
 			return elgg_error_response(elgg_echo('logouterror'));
 		}
 		

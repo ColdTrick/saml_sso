@@ -29,7 +29,7 @@ if (empty($forced_idps)) {
 
 $forced_idp = $forced_idps[0];
 
-$forward = elgg_get_session()->get('last_forward_from', current_page_url());
+$forward = elgg_get_session()->get('last_forward_from', elgg_get_current_url());
 
 $auth = new \OneLogin\Saml2\Auth($forced_idp->getSettings());
 $auth->login($forward);
