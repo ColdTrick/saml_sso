@@ -4,8 +4,20 @@ namespace ColdTrick\SAMLSSO\Controller;
 use Elgg\Request;
 use Elgg\Http\ErrorResponse;
 
+/**
+ * Metadata controller callback
+ */
 class Metadata {
 
+	/**
+	 * Returns metadata for a given IDP configuration
+	 *
+	 * @param \Elgg\Request $request the request
+	 *
+	 * @throws \OneLogin\Saml2\Error
+	 *
+	 * @return \Elgg\Http\ErrorResponse|\Elgg\Http\OkResponse
+	 */
 	public function __invoke(Request $request) {
 		$entity = $request->getEntityParam();
 		

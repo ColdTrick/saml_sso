@@ -2,8 +2,7 @@ SAML SSO
 ========
 
 ![Elgg 4.3](https://img.shields.io/badge/Elgg-4.3-green.svg)
-[![Build Status](https://scrutinizer-ci.com/g/ColdTrick/saml_sso/badges/build.png?b=master)](https://scrutinizer-ci.com/g/ColdTrick/saml_sso/build-status/master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ColdTrick/saml_sso/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ColdTrick/saml_sso/?branch=master)
+![Lint Checks](https://github.com/ColdTrick/saml_sso/actions/workflows/lint.yml/badge.svg?event=push)
 [![Latest Stable Version](https://poser.pugx.org/coldtrick/saml_sso/v/stable.svg)](https://packagist.org/packages/coldtrick/saml_sso)
 [![License](https://poser.pugx.org/coldtrick/saml_sso/license.svg)](https://packagist.org/packages/coldtrick/saml_sso)
 

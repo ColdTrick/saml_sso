@@ -5,18 +5,21 @@ namespace ColdTrick\SAMLSSO;
 use Elgg\Http\ResponseBuilder;
 use Elgg\Http\OkResponse;
 
+/**
+ * Logout callbacks
+ */
 class Logout {
 	
 	/**
 	 * Disable forced SSO login after a logout
 	 *
-	 * @param \Elgg\Hook $hook 'response', 'action:logout'
+	 * @param \Elgg\Event $event 'response', 'action:logout'
 	 *
 	 * @return null|ResponseBuilder
 	 */
-	public static function disableSso(\Elgg\Hook $hook): ?ResponseBuilder {
+	public static function disableSso(\Elgg\Event $event): ?ResponseBuilder {
 
-		$response = $hook->getValue();
+		$response = $event->getValue();
 		if (!$response instanceof OkResponse) {
 			return null;
 		}

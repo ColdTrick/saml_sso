@@ -3,8 +3,18 @@ namespace ColdTrick\SAMLSSO\Controller;
 
 use Elgg\Request;
 
+/**
+ * Single Sign On
+ */
 class SSO {
 
+	/**
+	 * Handles single sign on request
+	 *
+	 * @param Request $request the Request
+	 *
+	 * @return void
+	 */
 	public function __invoke(Request $request) {
 		$entity = $request->getEntityParam();
 

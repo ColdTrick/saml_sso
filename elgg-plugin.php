@@ -45,7 +45,7 @@ return [
 			'walled' => false,
 		],
 	],
-	'hooks' => [
+	'events' => [
 		'register' => [
 			'menu:entity' => [
 				'\ColdTrick\SAMLSSO\Menus::registerIDPEdit' => [],
@@ -53,7 +53,7 @@ return [
 			'menu:login' => [
 				'\ColdTrick\SAMLSSO\Menus::registerLoginMenu' => [],
 			],
-			'menu:page' => [
+			'menu:admin_header' => [
 				'\ColdTrick\SAMLSSO\Menus::registerAdminPageMenu' => [],
 			],
 		],

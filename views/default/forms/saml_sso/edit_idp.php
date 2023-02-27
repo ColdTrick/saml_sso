@@ -26,7 +26,6 @@ echo elgg_view_field([
 
 if ($entity && $entity->settings) {
 	echo elgg_format_element('pre', [], var_export(unserialize($entity->settings), true));
-	
 } else {
 	echo elgg_view_field([
 		'#type' => 'url',

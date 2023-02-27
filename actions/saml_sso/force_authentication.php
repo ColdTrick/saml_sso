@@ -10,7 +10,6 @@ if (!$idp instanceof \SAMLIDP) {
 if ($idp->force_authentication) {
 	unset($idp->force_authentication);
 } else {
-
 	// remove from existing entities
 	elgg_delete_metadata([
 		'type' => 'object',

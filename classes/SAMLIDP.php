@@ -2,14 +2,15 @@
 
 use OneLogin\Saml2\Constants;
 
+/**
+ * SAML IDP Entity
+ */
 class SAMLIDP extends ElggObject {
 	
 	const SUBTYPE = 'saml_idp';
 
 	/**
-	 * initializes the default class attributes
-	 *
-	 * @return void
+	 * {@inheritdoc}
 	 */
 	protected function initializeAttributes() {
 		parent::initializeAttributes();
@@ -21,9 +22,9 @@ class SAMLIDP extends ElggObject {
 	}
 	
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
-	public function getURL() {
+	public function getURL(): string {
 		return elgg_generate_entity_url($this, 'metadata');
 	}
 	
@@ -32,7 +33,7 @@ class SAMLIDP extends ElggObject {
 	 *
 	 * @return string
 	 */
-	public function getIDPID() {
+	public function getIDPID(): string {
 		return 'idp_' . elgg_get_friendly_title($this->getDisplayName());
 	}
 	
@@ -41,7 +42,7 @@ class SAMLIDP extends ElggObject {
 	 *
 	 * @return bool
 	 */
-	public function showOnLoginForm() {
+	public function showOnLoginForm(): bool {
 		return $this->show_on_login_form !== 0;
 	}
 	
@@ -50,49 +51,54 @@ class SAMLIDP extends ElggObject {
 	 *
 	 * @return array
 	 */
-	public function getSettings() {
+	public function getSettings(): array {
 		return [
-		    // Enable debug mode (to print errors).
-		    'debug' => !empty(elgg_get_config('debug')),
+			// Enable debug mode (to print errors).
+			'debug' => !empty(elgg_get_config('debug')),
 			'security' => [
 				'requestedAuthnContext' => false,
 			],
-		    // Service Provider Data that we are deploying.
-		    'sp' => $this->getSPSettings(),
-		
-		    // Identity Provider Data that we want connected with our SP.
-		    'idp' => $this->getIDPSettings(),
+			// Service Provider Data that we are deploying.
+			'sp' => $this->getSPSettings(),
+			
+			// Identity Provider Data that we want connected with our SP.
+			'idp' => $this->getIDPSettings(),
 		];
 	}
 	
-	protected function getSPSettings() {
+	/**
+	 * Return service provider settings
+	 *
+	 * @return array
+	 */
+	protected function getSPSettings(): array {
 		$result = [
-			 // Identifier of the SP entity  (must be a URI)
-	        'entityId' => elgg_generate_entity_url($this, 'metadata'),
-	        // Specifies info about where and how the <AuthnResponse> message MUST be
-	        // returned to the requester, in this case our SP.
-	        'assertionConsumerService' => array (
-	            // URL Location where the <Response> from the IdP will be returned
-	            'url' => elgg_generate_entity_url($this, 'acs'),
-	            // SAML protocol binding to be used when returning the <Response>
-	            // message. OneLogin Toolkit supports this endpoint for the
-	            // HTTP-POST binding only.
-	            'binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST',
-	        ),
-	        // Specifies info about where and how the <Logout Response> message MUST be
-	        // returned to the requester, in this case our SP.
-	        'singleLogoutService' => array (
-	            // URL Location where the <Response> from the IdP will be returned
-	            'url' => elgg_generate_entity_url($this, 'logout'),
-	            // SAML protocol binding to be used when returning the <Response>
-	            // message. OneLogin Toolkit supports the HTTP-Redirect binding
-	            // only for this endpoint.
-	            'binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect',
-	        ),
-	        // Specifies the constraints on the name identifier to be used to
-	        // represent the requested subject.
-	        // Take a look on lib/Saml2/Constants.php to see the NameIdFormat supported.
-	        'NameIDFormat' => Constants::NAMEID_UNSPECIFIED,
+			// Identifier of the SP entity  (must be a URI)
+			'entityId' => elgg_generate_entity_url($this, 'metadata'),
+			// Specifies info about where and how the <AuthnResponse> message MUST be
+			// returned to the requester, in this case our SP.
+			'assertionConsumerService' => [
+				// URL Location where the <Response> from the IdP will be returned
+				'url' => elgg_generate_entity_url($this, 'acs'),
+				// SAML protocol binding to be used when returning the <Response>
+				// message. OneLogin Toolkit supports this endpoint for the
+				// HTTP-POST binding only.
+				'binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST',
+			],
+			// Specifies info about where and how the <Logout Response> message MUST be
+			// returned to the requester, in this case our SP.
+			'singleLogoutService' => [
+				// URL Location where the <Response> from the IdP will be returned
+				'url' => elgg_generate_entity_url($this, 'logout'),
+				// SAML protocol binding to be used when returning the <Response>
+				// message. OneLogin Toolkit supports the HTTP-Redirect binding
+				// only for this endpoint.
+				'binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect',
+			],
+			// Specifies the constraints on the name identifier to be used to
+			// represent the requested subject.
+			// Take a look on lib/Saml2/Constants.php to see the NameIdFormat supported.
+			'NameIDFormat' => Constants::NAMEID_UNSPECIFIED,
 		];
 		
 		if ($this->x509cert) {
@@ -106,7 +112,12 @@ class SAMLIDP extends ElggObject {
 		return $result;
 	}
 	
-	protected function getIDPSettings() {
+	/**
+	 * Returns Identity Provider settings
+	 *
+	 * @return array
+	 */
+	protected function getIDPSettings(): array {
 		$settings = $this->settings;
 		if (!empty($settings)) {
 			return unserialize($this->settings);

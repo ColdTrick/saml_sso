@@ -2,10 +2,19 @@
 namespace ColdTrick\SAMLSSO\Controller;
 
 use Elgg\Request;
-use Elgg\Http\ErrorResponse;
 
+/**
+ * Assertion Consumer Service controller
+ */
 class ACS {
 
+	/**
+	 * Handles ACS request
+	 *
+	 * @param Request $request the request
+	 *
+	 * @return \Elgg\Http\RedirectResponse|\Elgg\Http\ErrorResponse|\Elgg\Http\OkResponse
+	 */
 	public function __invoke(Request $request) {
 		$entity = $request->getEntityParam();
 		elgg_entity_gatekeeper($entity->guid, 'object', 'saml_idp');
@@ -13,7 +22,7 @@ class ACS {
 		// edge case where SSO proces kicks in but there is already a logged in user
 		if (elgg_is_logged_in()) {
 			$forward = $request->getParam('RelayState', '/', false);
-            return elgg_redirect_response($forward);
+			return elgg_redirect_response($forward);
 		}
 		
 		$saml_response = $request->getParam('SAMLResponse', null, false);
@@ -33,17 +42,16 @@ class ACS {
 				return elgg_error_response($response->getError());
 			}
 			
-		 	$user = get_user_by_username($response->getNameId());
-            if (empty($user)) {
-            	elgg_get_session()->set('disable_sso', true);
-            	return elgg_error_response(elgg_echo('login:baduser'));
-            }
-            
-            elgg_login($user, true);
-             
+			$user = get_user_by_username($response->getNameId());
+			if (empty($user)) {
+				elgg_get_session()->set('disable_sso', true);
+				return elgg_error_response(elgg_echo('login:baduser'));
+			}
+			
+			elgg_login($user, true);
+			
 			$forward = $request->getParam('RelayState', '/', false);
-            return elgg_redirect_response($forward);
-            
+			return elgg_redirect_response($forward);
 		} catch (\Exception $e) {
 			elgg_get_session()->set('disable_sso', true);
 			return elgg_error_response($e->getMessage());

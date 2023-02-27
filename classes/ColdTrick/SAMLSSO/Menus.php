@@ -2,47 +2,49 @@
 
 namespace ColdTrick\SAMLSSO;
 
+/**
+ * Various menu callbacks
+ */
 class Menus {
 	
 	/**
-	 * Hook to register menu items on the admin pages
+	 * Register menu items on the admin pages
 	 *
-	 * @param \Elgg\Hook $hook 'register', 'menu:page'
+	 * @param \Elgg\Event $event 'register', 'menu:admin_header'
 	 *
 	 * @return boolean
 	 */
-	public static function registerAdminPageMenu(\Elgg\Hook $hook) {
+	public static function registerAdminPageMenu(\Elgg\Event $event) {
 		if (!elgg_is_admin_logged_in() || !elgg_in_context('admin')) {
 			return;
 		}
 		
-		$return = $hook->getValue();
+		$return = $event->getValue();
 		
 		$return[] = \ElggMenuItem::factory([
 			'name' => 'manage_idps',
 			'href' => 'admin/configure_utilities/manage_idps',
 			'text' => elgg_echo('admin:configure_utilities:manage_idps'),
 			'parent_name' => 'configure_utilities',
-			'section' => 'configure',
 		]);
 		
 		return $return;
 	}
 	
 	/**
-	 * Hook to register menu items to the IDP entity
+	 * Register menu items to the IDP entity
 	 *
-	 * @param \Elgg\Hook $hook 'register', 'menu:entity'
+	 * @param \Elgg\Event $event 'register', 'menu:entity'
 	 *
 	 * @return boolean
 	 */
-	public static function registerIDPEdit(\Elgg\Hook $hook) {
-		$entity = $hook->getEntityParam();
+	public static function registerIDPEdit(\Elgg\Event $event) {
+		$entity = $event->getEntityParam();
 		if (!$entity instanceof \SAMLIDP) {
 			return;
 		}
 		
-		$return = $hook->getValue();
+		$return = $event->getValue();
 		
 		$return[] = \ElggMenuItem::factory([
 			'name' => 'edit',
@@ -69,23 +71,24 @@ class Menus {
 	}
 	
 	/**
-	 * Hook to register menu items to the IDP entity
+	 * Register menu items to the IDP entity
 	 *
-	 * @param \Elgg\Hook $hook 'register', 'menu:login'
+	 * @param \Elgg\Event $event 'register', 'menu:login'
 	 *
 	 * @return boolean
 	 */
-	public static function registerLoginMenu(\Elgg\Hook $hook) {
+	public static function registerLoginMenu(\Elgg\Event $event) {
 		$entities = elgg_get_entities([
 			'type' => 'object',
 			'subtype' => 'saml_idp',
+			'limit' => false,
 		]);
 		
 		if (empty($entities)) {
 			return;
 		}
 		
-		$return = $hook->getValue();
+		$return = $event->getValue();
 		
 		foreach ($entities as $entity) {
 			if (!$entity->showOnLoginForm()) {

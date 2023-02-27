@@ -9,7 +9,7 @@ if (!empty($guid)) {
 		return elgg_error_response();
 	}
 } else {
-	$idp = new SAMLIDP();
+	$idp = new \SAMLIDP();
 	$idp->save();
 }
 
