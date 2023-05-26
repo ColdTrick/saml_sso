@@ -18,51 +18,6 @@ return [
 			'class' => \SAMLIDP::class,
 		],
 	],
-	'routes' => [
-		'login:object:saml_idp' => [
-			'path' => 'saml_idp/login/{guid}',
-			'controller' => ColdTrick\SAMLSSO\Controller\SSO::class,
-			'middleware' => [
-				LoggedOutGatekeeper::class,
-			],
-			'walled' => false,
-		],
-		'acs:object:saml_idp' => [
-			'path' => 'saml_idp/acs/{guid}',
-			'controller' => ColdTrick\SAMLSSO\Controller\ACS::class,
-			'walled' => false,
-		],
-		'logout:object:saml_idp' => [
-			'path' => 'saml_idp/logout/{guid}',
-			'controller' => ColdTrick\SAMLSSO\Controller\SLO::class,
-			'middleware' => [
-				Gatekeeper::class,
-			],
-		],
-		'metadata:object:saml_idp' => [
-			'path' => 'saml_idp/metadata/{guid}',
-			'controller' => ColdTrick\SAMLSSO\Controller\Metadata::class,
-			'walled' => false,
-		],
-	],
-	'events' => [
-		'register' => [
-			'menu:entity' => [
-				'\ColdTrick\SAMLSSO\Menus::registerIDPEdit' => [],
-			],
-			'menu:login' => [
-				'\ColdTrick\SAMLSSO\Menus::registerLoginMenu' => [],
-			],
-			'menu:admin_header' => [
-				'\ColdTrick\SAMLSSO\Menus::registerAdminPageMenu' => [],
-			],
-		],
-		'response' => [
-			'action:logout' => [
-				'\ColdTrick\SAMLSSO\Logout::disableSso' => [],
-			],
-		],
-	],
 	'actions' => [
 		'saml_sso/add_idp_from_xml' => [
 			'access' => 'admin',
@@ -72,6 +27,51 @@ return [
 		],
 		'saml_sso/force_authentication' => [
 			'access' => 'admin',
+		],
+	],
+	'routes' => [
+		'login:object:saml_idp' => [
+			'path' => 'saml_idp/login/{guid}',
+			'controller' => \ColdTrick\SAMLSSO\Controller\SSO::class,
+			'middleware' => [
+				LoggedOutGatekeeper::class,
+			],
+			'walled' => false,
+		],
+		'acs:object:saml_idp' => [
+			'path' => 'saml_idp/acs/{guid}',
+			'controller' => \ColdTrick\SAMLSSO\Controller\ACS::class,
+			'walled' => false,
+		],
+		'logout:object:saml_idp' => [
+			'path' => 'saml_idp/logout/{guid}',
+			'controller' => \ColdTrick\SAMLSSO\Controller\SLO::class,
+			'middleware' => [
+				Gatekeeper::class,
+			],
+		],
+		'metadata:object:saml_idp' => [
+			'path' => 'saml_idp/metadata/{guid}',
+			'controller' => \ColdTrick\SAMLSSO\Controller\Metadata::class,
+			'walled' => false,
+		],
+	],
+	'events' => [
+		'register' => [
+			'menu:entity' => [
+				'\ColdTrick\SAMLSSO\Menus\Entity::registerIDPEdit' => [],
+			],
+			'menu:login' => [
+				'\ColdTrick\SAMLSSO\Menus\Login::register' => [],
+			],
+			'menu:admin_header' => [
+				'\ColdTrick\SAMLSSO\Menus\AdminHeader::register' => [],
+			],
+		],
+		'response' => [
+			'action:logout' => [
+				'\ColdTrick\SAMLSSO\Logout::disableSso' => [],
+			],
 		],
 	],
 	'view_extensions' => [
