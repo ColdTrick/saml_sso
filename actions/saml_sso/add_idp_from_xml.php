@@ -22,10 +22,12 @@ try {
 
 $idp_settings = elgg_extract('idp', $settings);
 
-$idp = new SAMLIDP();
+$idp = new \SAMLIDP();
 $idp->title = $title;
 $idp->settings = serialize($idp_settings);
 
-$idp->save();
+if (!$idp->save()) {
+	return elgg_error_response(elgg_echo('save:fail'));
+}
 
-return elgg_ok_response();
+return elgg_ok_response(elgg_echo('save:success'));

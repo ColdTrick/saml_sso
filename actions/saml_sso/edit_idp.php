@@ -1,16 +1,17 @@
 <?php
 
 $guid = (int) get_input('guid');
-
 if (!empty($guid)) {
 	$idp = get_entity($guid);
-	
 	if (!$idp instanceof \SAMLIDP) {
-		return elgg_error_response();
+		return elgg_error_response(elgg_echo('error:missing_data'));
 	}
 } else {
 	$idp = new \SAMLIDP();
-	$idp->save();
+	
+	if (!$idp->save()) {
+		return elgg_error_response(elgg_echo('save:fail'));
+	}
 }
 
 $idp->title = get_input('title');
@@ -21,4 +22,4 @@ $idp->x509cert = get_input('x509cert');
 $idp->private_key = get_input('private_key');
 $idp->show_on_login_form = (int) get_input('show_on_login_form');
 
-return elgg_ok_response();
+return elgg_ok_response(elgg_echo('save:success'));

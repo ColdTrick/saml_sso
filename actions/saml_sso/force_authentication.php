@@ -4,7 +4,7 @@ $guid = (int) get_input('guid');
 
 $idp = get_entity($guid);
 if (!$idp instanceof \SAMLIDP) {
-	return elgg_error_response();
+	return elgg_error_response(elgg_echo('error:missing_data'));
 }
 
 if ($idp->force_authentication) {
@@ -13,7 +13,7 @@ if ($idp->force_authentication) {
 	// remove from existing entities
 	elgg_delete_metadata([
 		'type' => 'object',
-		'subtype' => 'saml_idp',
+		'subtype' => \SAMLIDP::SUBTYPE,
 		'metadata_name' => 'force_authentication',
 		'limit' => false,
 	]);
@@ -21,4 +21,4 @@ if ($idp->force_authentication) {
 	$idp->force_authentication = true;
 }
 
-return elgg_ok_response();
+return elgg_ok_response(elgg_echo('save:success'));

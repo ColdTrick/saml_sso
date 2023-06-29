@@ -4,8 +4,16 @@ use OneLogin\Saml2\Constants;
 
 /**
  * SAML IDP Entity
+ *
+ * @property bool   $force_authentication force redirect logged-out users to this IDP
+ * @property string $private_key          private certificate key
+ * @property string $settings             serialized string of the IDP data from a remote source
+ * @property int    $show_on_login_form   show the IDP on the login form (1|0)
+ * @property string $slo_url              Single LogOut endpoint URL
+ * @property string $sso_url              Single SignOn endpoint URL
+ * @property string $x509cert             x509 certificate (public)
  */
-class SAMLIDP extends ElggObject {
+class SAMLIDP extends \ElggObject {
 	
 	const SUBTYPE = 'saml_idp';
 
