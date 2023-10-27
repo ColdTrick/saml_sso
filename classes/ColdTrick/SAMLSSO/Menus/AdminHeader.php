@@ -28,7 +28,7 @@ class AdminHeader {
 			'name' => 'manage_idps',
 			'text' => elgg_echo('admin:configure_utilities:manage_idps'),
 			'href' => 'admin/configure_utilities/manage_idps',
-			'parent_name' => 'configure_utilities',
+			'parent_name' => 'utilities',
 		]);
 		
 		return $return;

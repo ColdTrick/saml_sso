@@ -11,10 +11,10 @@
 	},
 	"require": {
 		"composer/installers": "^1.0.8",
-		"onelogin/php-saml": "~4.0.0"
+		"onelogin/php-saml": "~4.1.0"
 	},
 	"conflict": {
-		"elgg/elgg": "<5.0"
+		"elgg/elgg": "<5.1"
 	},
 	"config": {
 		"allow-plugins": {
