@@ -19,9 +19,10 @@ class ACS {
 		$entity = $request->getEntityParam();
 		elgg_entity_gatekeeper($entity->guid, 'object', 'saml_idp');
 		
+		$forward = elgg_normalize_site_url($request->getParam('RelayState', '/', false)) ?? '/';
+		
 		// edge case where SSO proces kicks in but there is already a logged in user
 		if (elgg_is_logged_in()) {
-			$forward = $request->getParam('RelayState', '/', false);
 			return elgg_redirect_response($forward);
 		}
 		
@@ -50,7 +51,6 @@ class ACS {
 			
 			elgg_login($user, true);
 			
-			$forward = $request->getParam('RelayState', '/', false);
 			return elgg_redirect_response($forward);
 		} catch (\Exception $e) {
 			elgg_get_session()->set('disable_sso', true);
