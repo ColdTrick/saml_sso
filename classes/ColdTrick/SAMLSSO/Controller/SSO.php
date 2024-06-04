@@ -1,6 +1,7 @@
 <?php
 namespace ColdTrick\SAMLSSO\Controller;
 
+use Elgg\Http\ErrorResponse;
 use Elgg\Request;
 
 /**
@@ -20,7 +21,11 @@ class SSO {
 
 		elgg_entity_gatekeeper($entity->guid, 'object', 'saml_idp');
 		
-		$auth = new \OneLogin\Saml2\Auth($entity->getSettings());
-		$auth->login('/');
+		try {
+			$auth = new \OneLogin\Saml2\Auth($entity->getSettings());
+			$auth->login('/');
+		} catch (\Exception $e) {
+			return new ErrorResponse($e->getMessage());
+		}
 	}
 }
