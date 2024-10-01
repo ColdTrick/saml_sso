@@ -69,6 +69,16 @@ echo elgg_view_field([
 	'value' => 1,
 ]);
 
+echo elgg_view_field([
+	'#type' => 'checkbox',
+	'#label' => elgg_echo('saml_sso:saml_idp:use_email'),
+	'name' => 'use_email',
+	'checked' => $entity ? (bool) $entity->use_email : false,
+	'switch' => true,
+	'default' => 0,
+	'value' => 1,
+]);
+
 $footer = elgg_view_field([
 	'#type' => 'submit',
 	'text' => elgg_echo('save'),

@@ -43,7 +43,7 @@ class ACS {
 				return elgg_error_response($response->getError());
 			}
 			
-			$user = elgg_get_user_by_username($response->getNameId());
+			$user = elgg_get_user_by_username($response->getNameId(), (bool) $entity->use_email);
 			if (empty($user)) {
 				elgg_get_session()->set('disable_sso', true);
 				return elgg_error_response(elgg_echo('login:baduser'));

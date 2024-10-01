@@ -20,6 +20,7 @@ return [
 	'saml_sso:saml_idp:x509cert' => "x509 Certificate",
 	'saml_sso:saml_idp:private_key' => "Private Key",
 	'saml_sso:saml_idp:show_on_login_form' => "Show on login form",
+	'saml_sso:saml_idp:use_email' => "Use email to match user",
 
 	'saml_sso:force_authentication' => "Forced Authentication",
 	'saml_sso:force_authentication:enable' => "Enable Forced Authentication",
