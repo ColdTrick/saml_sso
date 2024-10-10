@@ -1,6 +1,10 @@
 Version history
 ===============
 
+5.2 (2024-10-10):
+
+- added: added a configuration to control if users are matched on email
+
 5.1 (2024-06-28):
 
 - changed: added compatibility with Elgg 6
