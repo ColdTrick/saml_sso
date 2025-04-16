@@ -1,6 +1,8 @@
 <?php
+
 namespace ColdTrick\SAMLSSO\Controller;
 
+use Elgg\Exceptions\HttpException;
 use Elgg\Request;
 
 /**
@@ -13,15 +15,18 @@ class ACS {
 	 *
 	 * @param Request $request the request
 	 *
-	 * @return \Elgg\Http\RedirectResponse|\Elgg\Http\ErrorResponse|\Elgg\Http\OkResponse
+	 * @return \Elgg\Http\ResponseBuilder
+	 * @throws HttpException
 	 */
 	public function __invoke(Request $request) {
+		/* @var $entity SAMLIDP */
 		$entity = $request->getEntityParam();
-		elgg_entity_gatekeeper($entity->guid, 'object', 'saml_idp');
+		
+		elgg_entity_gatekeeper($entity->guid, 'object', \SAMLIDP::SUBTYPE);
 		
 		$forward = elgg_normalize_site_url($request->getParam('RelayState', '/', false)) ?? '/';
 		
-		// edge case where SSO proces kicks in but there is already a logged in user
+		// edge case where SSO proces kicks in but there is already a logged-in user
 		if (elgg_is_logged_in()) {
 			return elgg_redirect_response($forward);
 		}
@@ -43,6 +48,18 @@ class ACS {
 				return elgg_error_response($response->getError());
 			}
 			
+			// check for SAML replay
+			$id = $response->getAssertionId() ?? $response->getId();
+			if (!empty($id)) {
+				if (_elgg_services()->hmacCacheTable->loadHMAC($id)) {
+					return elgg_error_response(elgg_echo('saml_sso:acs:error:replay'), REFERRER, ELGG_HTTP_UNAUTHORIZED);
+				}
+				
+				// need to store the ID for replay protection
+				_elgg_services()->hmacCacheTable->storeHMAC($id);
+			}
+			
+			// try to find the user
 			$user = elgg_get_user_by_username($response->getNameId(), (bool) $entity->use_email);
 			if (empty($user)) {
 				elgg_get_session()->set('disable_sso', true);

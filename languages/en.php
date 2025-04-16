@@ -7,7 +7,7 @@ return [
 	'saml_sso:settings:use_http_x_forwarded' => "Use proxy variables",
 	'saml_sso:settings:use_http_x_forwarded:help' => "Allow the usage of HTTP_X_FORWARDED server information",
 	'saml_sso:settings:disable_sso_on_logout' => "Disable SSO on logout",
-	'saml_sso:settings:disable_sso_on_logout:help' => "Enabling this will prevent forced SSO for users that explicitely use the logout action",
+	'saml_sso:settings:disable_sso_on_logout:help' => "Enabling this will prevent forced SSO for users that explicitly use the logout action",
 	
 	'add:object:saml_idp' => "Create IDP",
 	'add:object:saml_idp:from_xml' => "Create IDP from XML",
@@ -25,4 +25,6 @@ return [
 	'saml_sso:force_authentication' => "Forced Authentication",
 	'saml_sso:force_authentication:enable' => "Enable Forced Authentication",
 	'saml_sso:force_authentication:disable' => "Disable Forced Authentication",
+	
+	'saml_sso:acs:error:replay' => "A duplicate authentication request has been detected. Please retry logging in.",
 ];
