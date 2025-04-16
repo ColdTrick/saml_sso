@@ -1,7 +1,9 @@
 <?php
+
 namespace ColdTrick\SAMLSSO\Controller;
 
-use Elgg\Http\ErrorResponse;
+use Elgg\Exceptions\HttpException;
+use Elgg\Http\ResponseBuilder;
 use Elgg\Request;
 
 /**
@@ -14,18 +16,21 @@ class SSO {
 	 *
 	 * @param Request $request the Request
 	 *
-	 * @return void
+	 * @return null|ResponseBuilder
+	 * @throws HttpException
 	 */
 	public function __invoke(Request $request) {
 		$entity = $request->getEntityParam();
 
-		elgg_entity_gatekeeper($entity->guid, 'object', 'saml_idp');
+		elgg_entity_gatekeeper($entity->guid, 'object', \SAMLIDP::SUBTYPE);
 		
 		try {
 			$auth = new \OneLogin\Saml2\Auth($entity->getSettings());
 			$auth->login('/');
 		} catch (\Exception $e) {
-			return new ErrorResponse($e->getMessage());
+			return elgg_error_response($e->getMessage());
 		}
+		
+		return null;
 	}
 }

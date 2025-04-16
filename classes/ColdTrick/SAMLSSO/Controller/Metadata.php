@@ -1,8 +1,8 @@
 <?php
+
 namespace ColdTrick\SAMLSSO\Controller;
 
 use Elgg\Request;
-use Elgg\Http\ErrorResponse;
 
 /**
  * Metadata controller callback
@@ -14,14 +14,12 @@ class Metadata {
 	 *
 	 * @param \Elgg\Request $request the request
 	 *
-	 * @throws \OneLogin\Saml2\Error
-	 *
-	 * @return \Elgg\Http\ErrorResponse|\Elgg\Http\OkResponse
+	 * @return \Elgg\Http\ResponseBuilder
 	 */
 	public function __invoke(Request $request) {
 		$entity = $request->getEntityParam();
 		
-		elgg_entity_gatekeeper($entity->guid, 'object', 'saml_idp');
+		elgg_entity_gatekeeper($entity->guid, 'object', \SAMLIDP::SUBTYPE);
 		
 		try {
 			$auth = new \OneLogin\Saml2\Auth($entity->getSettings());
@@ -35,10 +33,10 @@ class Metadata {
 				);
 			}
 		} catch (\Exception $e) {
-			return new ErrorResponse($e->getMessage());
+			return elgg_error_response($e->getMessage());
 		}
 		
-		// need to set charset because OneLogin generates xml without encoding set explicitely
+		// need to set charset because OneLogin generates xml without encoding set explicitly
 		header('Content-Type: text/xml; charset=ISO-8859-1');
 		return elgg_ok_response($metadata);
 	}

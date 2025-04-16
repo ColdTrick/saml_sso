@@ -16,7 +16,7 @@ use OneLogin\Saml2\Constants;
  */
 class SAMLIDP extends \ElggObject {
 	
-	const SUBTYPE = 'saml_idp';
+	public const SUBTYPE = 'saml_idp';
 
 	/**
 	 * {@inheritdoc}

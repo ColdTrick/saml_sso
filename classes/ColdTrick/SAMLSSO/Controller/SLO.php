@@ -1,4 +1,5 @@
 <?php
+
 namespace ColdTrick\SAMLSSO\Controller;
 
 use Elgg\Request;
@@ -13,7 +14,7 @@ class SLO {
 	 *
 	 * @param Request $request the request
 	 *
-	 * @return \Elgg\Http\ErrorResponse|\Elgg\Http\OkResponse
+	 * @return \Elgg\Http\ResponseBuilder
 	 */
 	public function __invoke(Request $request) {
 		
