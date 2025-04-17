@@ -1,10 +1,13 @@
 <?php
 /**
- * This file was created by Translation Editor v11.1
- * On 2023-05-17 15:11
+ * This file was created by Translation Editor v14.0.3
+ * On 2025-04-17 10:21
  */
 
 return array (
+  'saml_sso:acs:error:replay' => 'Er is een dubbel authenticatie verzoek gedetecteerd. Probeer het aanmelden opnieuw.',
+  'saml_sso:settings:enable_replay_protection' => 'Schakel SAML replay protectie in',
+  'saml_sso:settings:enable_replay_protection:help' => 'Bescherm tegen het hergebruik van een SAML authenticatie antwoord',
   'item:object:saml_idp' => 'SAML IDP configuratie',
   'admin:configure_utilities:manage_idps' => 'Beheer SAML IDPs',
   'saml_sso:settings:use_http_x_forwarded' => 'Gebruik proxy variabelen',
