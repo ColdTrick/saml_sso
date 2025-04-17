@@ -49,14 +49,18 @@ class ACS {
 			}
 			
 			// check for SAML replay
-			$id = $response->getAssertionId() ?? $response->getId();
-			if (!empty($id)) {
-				if (_elgg_services()->hmacCacheTable->loadHMAC($id)) {
-					return elgg_error_response(elgg_echo('saml_sso:acs:error:replay'), REFERRER, ELGG_HTTP_UNAUTHORIZED);
+			if ((bool) elgg_get_plugin_setting('enable_replay_protection', 'saml_sso')) {
+				$id = $response->getAssertionId() ?? $response->getId();
+				if (!empty($id)) {
+					if (_elgg_services()->hmacCacheTable->loadHMAC($id)) {
+						elgg_get_session()->set('disable_sso', true);
+						
+						return elgg_error_response(elgg_echo('saml_sso:acs:error:replay'), REFERRER, ELGG_HTTP_UNAUTHORIZED);
+					}
+					
+					// need to store the ID for replay protection
+					_elgg_services()->hmacCacheTable->storeHMAC($id);
 				}
-				
-				// need to store the ID for replay protection
-				_elgg_services()->hmacCacheTable->storeHMAC($id);
 			}
 			
 			// try to find the user

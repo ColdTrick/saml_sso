@@ -6,6 +6,8 @@ return [
 	
 	'saml_sso:settings:use_http_x_forwarded' => "Use proxy variables",
 	'saml_sso:settings:use_http_x_forwarded:help' => "Allow the usage of HTTP_X_FORWARDED server information",
+	'saml_sso:settings:enable_replay_protection' => "Enable SAML replay protection",
+	'saml_sso:settings:enable_replay_protection:help' => "Protect against re-use of a received SAML authentication response",
 	'saml_sso:settings:disable_sso_on_logout' => "Disable SSO on logout",
 	'saml_sso:settings:disable_sso_on_logout:help' => "Enabling this will prevent forced SSO for users that explicitly use the logout action",
 	

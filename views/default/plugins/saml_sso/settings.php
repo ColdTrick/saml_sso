@@ -7,23 +7,25 @@
 $plugin = elgg_extract('entity', $vars);
 
 echo elgg_view_field([
-	'#type' => 'checkbox',
+	'#type' => 'switch',
 	'#label' => elgg_echo('saml_sso:settings:use_http_x_forwarded'),
 	'#help' => elgg_echo('saml_sso:settings:use_http_x_forwarded:help'),
 	'name' => 'params[use_http_x_forwarded]',
-	'checked' => (bool) $plugin->use_http_x_forwarded,
-	'switch' => true,
-	'default' => 0,
-	'value' => 1,
+	'value' => $plugin->use_http_x_forwarded,
 ]);
 
 echo elgg_view_field([
-	'#type' => 'checkbox',
+	'#type' => 'switch',
+	'#label' => elgg_echo('saml_sso:settings:enable_replay_protection'),
+	'#help' => elgg_echo('saml_sso:settings:enable_replay_protection:help'),
+	'name' => 'params[enable_replay_protection]',
+	'value' => $plugin->enable_replay_protection,
+]);
+
+echo elgg_view_field([
+	'#type' => 'switch',
 	'#label' => elgg_echo('saml_sso:settings:disable_sso_on_logout'),
 	'#help' => elgg_echo('saml_sso:settings:disable_sso_on_logout:help'),
 	'name' => 'params[disable_sso_on_logout]',
-	'checked' => (bool) $plugin->disable_sso_on_logout,
-	'switch' => true,
-	'default' => 0,
-	'value' => 1,
+	'value' => $plugin->disable_sso_on_logout,
 ]);
