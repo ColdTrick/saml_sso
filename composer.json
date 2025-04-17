@@ -13,6 +13,6 @@
 		"onelogin/php-saml": "~4.1.0"
 	},
 	"conflict": {
-		"elgg/elgg": "<5.1"
+		"elgg/elgg": "<6.2"
 	}
 }
