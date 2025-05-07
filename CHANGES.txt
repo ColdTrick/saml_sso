@@ -1,6 +1,11 @@
 Version history
 ===============
 
+6.0 (2025-05-07):
+
+- added: SAML replay protection
+- changed: updated requirements to Elgg 6.2
+
 5.2 (2024-10-10):
 
 - added: added a configuration to control if users are matched on email
