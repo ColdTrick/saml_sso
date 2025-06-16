@@ -24,6 +24,8 @@ return array (
   'saml_sso:saml_idp:private_key' => 'Private Key',
   'saml_sso:saml_idp:show_on_login_form' => 'Toon op aanmeld formulier',
   'saml_sso:saml_idp:use_email' => 'Gebruik het emailadres om gebruikers te matchen',
+  'saml_sso:saml_idp:settings:current' => 'Huidige IDP instellingen',
+  'saml_sso:saml_idp:settings:update' => 'Invoeren om de IDP instellingen bij te werken',
   'saml_sso:force_authentication' => 'Geforceerde Authenticatie',
   'saml_sso:force_authentication:enable' => 'Activeer Geforceerde Authenticatie',
   'saml_sso:force_authentication:disable' => 'Deactiveer Geforceerde Authenticatie',

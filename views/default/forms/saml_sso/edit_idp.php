@@ -25,7 +25,26 @@ echo elgg_view_field([
 ]);
 
 if ($entity && $entity->settings) {
-	echo elgg_format_element('pre', [], var_export(unserialize($entity->settings), true));
+	echo elgg_view_message('info', elgg_format_element('pre', [], var_export(unserialize($entity->settings), true)), [
+		'title' => elgg_echo('saml_sso:saml_idp:settings:current'),
+	]);
+	
+	echo elgg_view_field([
+		'#type' => 'fieldset',
+		'legend' => elgg_echo('saml_sso:saml_idp:settings:update'),
+		'fields' => [
+			[
+				'#type' => 'url',
+				'#label' => elgg_echo('saml_sso:add_from_xml:url'),
+				'name' => 'settings_url',
+			],
+			[
+				'#type' => 'plaintext',
+				'#label' => elgg_echo('saml_sso:add_from_xml:xml'),
+				'name' => 'settings_xml',
+			],
+		]
+	]);
 } else {
 	echo elgg_view_field([
 		'#type' => 'url',
@@ -41,23 +60,23 @@ if ($entity && $entity->settings) {
 		'name' => 'slo_url',
 		'value' => $entity ? $entity->slo_url : null,
 	]);
+	
+	echo elgg_view_field([
+		'#type' => 'plaintext',
+		'#label' => elgg_echo('saml_sso:saml_idp:x509cert'),
+		'name' => 'x509cert',
+		'rows' => 3,
+		'value' => $entity ? $entity->x509cert : null,
+	]);
+	
+	echo elgg_view_field([
+		'#type' => 'plaintext',
+		'#label' => elgg_echo('saml_sso:saml_idp:private_key'),
+		'name' => 'private_key',
+		'rows' => 3,
+		'value' => $entity ? $entity->private_key : null,
+	]);
 }
-
-echo elgg_view_field([
-	'#type' => 'plaintext',
-	'#label' => elgg_echo('saml_sso:saml_idp:x509cert'),
-	'name' => 'x509cert',
-	'rows' => 3,
-	'value' => $entity ? $entity->x509cert : null,
-]);
-
-echo elgg_view_field([
-	'#type' => 'plaintext',
-	'#label' => elgg_echo('saml_sso:saml_idp:private_key'),
-	'name' => 'private_key',
-	'rows' => 3,
-	'value' => $entity ? $entity->private_key : null,
-]);
 
 echo elgg_view_field([
 	'#type' => 'checkbox',
