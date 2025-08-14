@@ -35,7 +35,7 @@ $idp->show_on_login_form = (int) get_input('show_on_login_form');
 $idp->use_email = (int) get_input('use_email');
 
 if ($idp_settings) {
-	$idp->settings = serialize($idp_settings);
+	$idp->settings = serialize(elgg_extract('idp', $idp_settings));
 } else {
 	$idp->sso_url = get_input('sso_url');
 	$idp->slo_url = get_input('slo_url');
