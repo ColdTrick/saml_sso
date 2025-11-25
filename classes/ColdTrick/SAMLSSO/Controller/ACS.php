@@ -2,6 +2,7 @@
 
 namespace ColdTrick\SAMLSSO\Controller;
 
+use Elgg\Exceptions\DatabaseException;
 use Elgg\Exceptions\HttpException;
 use Elgg\Request;
 
@@ -59,7 +60,11 @@ class ACS {
 					}
 					
 					// need to store the ID for replay protection
-					_elgg_services()->hmacCacheTable->storeHMAC($id);
+					try {
+						_elgg_services()->hmacCacheTable->storeHMAC($id);
+					} catch (DatabaseException $e) {
+						elgg_log('Unable to store in HMAC table during Single Sign On replay protection', \Psr\Log\LogLevel::WARNING);
+					}
 				}
 			}
 			
