@@ -1,6 +1,10 @@
 Version history
 ===============
 
+6.1.4 (2026-03-24):
+
+- several small chores/fixes
+
 6.1.3 (2025-12-19):
 
 - several small chores/fixes
