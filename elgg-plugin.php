@@ -9,7 +9,7 @@ return [
 		'version' => '6.1.4',
 	],
 	'settings' => [
-		'use_http_x_forwarded' => 0,
+		'use_http_x_forwarded' => false,
 		'disable_sso_on_logout' => false,
 		'enable_replay_protection' => true,
 	],
