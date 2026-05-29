@@ -6,7 +6,7 @@ use Elgg\Router\Middleware\LoggedOutGatekeeper;
 return [
 	'plugin' => [
 		'name' => 'SAML SSO',
-		'version' => '6.1.4',
+		'version' => '6.1.5',
 	],
 	'settings' => [
 		'use_http_x_forwarded' => false,
