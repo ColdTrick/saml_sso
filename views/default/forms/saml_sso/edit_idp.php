@@ -79,23 +79,17 @@ if ($entity && $entity->settings) {
 }
 
 echo elgg_view_field([
-	'#type' => 'checkbox',
+	'#type' => 'switch',
 	'#label' => elgg_echo('saml_sso:saml_idp:show_on_login_form'),
 	'name' => 'show_on_login_form',
-	'checked' => $entity ? ($entity->show_on_login_form !== 0) : false,
-	'switch' => true,
-	'default' => 0,
-	'value' => 1,
+	'value' => $entity?->show_on_login_form,
 ]);
 
 echo elgg_view_field([
-	'#type' => 'checkbox',
+	'#type' => 'switch',
 	'#label' => elgg_echo('saml_sso:saml_idp:use_email'),
 	'name' => 'use_email',
-	'checked' => $entity ? (bool) $entity->use_email : false,
-	'switch' => true,
-	'default' => 0,
-	'value' => 1,
+	'value' => $entity?->use_email,
 ]);
 
 $footer = elgg_view_field([
