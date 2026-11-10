@@ -20,14 +20,14 @@ class ACS {
 	 * @throws HttpException
 	 */
 	public function __invoke(Request $request) {
-		/* @var $entity SAMLIDP */
+		/** @var \SAMLIDP $entity */
 		$entity = $request->getEntityParam();
 		
 		elgg_entity_gatekeeper($entity->guid, 'object', \SAMLIDP::SUBTYPE);
 		
 		$forward = elgg_normalize_site_url($request->getParam('RelayState', '/', false)) ?? '/';
 		
-		// edge case where SSO proces kicks in but there is already a logged-in user
+		// edge case where SSO process kicks in but there is already a logged-in user
 		if (elgg_is_logged_in()) {
 			return elgg_redirect_response($forward);
 		}

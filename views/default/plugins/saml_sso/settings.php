@@ -3,7 +3,7 @@
  * All plugin settings can be configured by this view
  */
 
-/* @var $plugin \ElggPlugin */
+/** @var \ElggPlugin $plugin */
 $plugin = elgg_extract('entity', $vars);
 
 echo elgg_view_field([

@@ -27,10 +27,10 @@ class Login {
 			return null;
 		}
 		
-		/* @var $return MenuItems */
+		/** @var MenuItems $return */
 		$return = $event->getValue();
 		
-		/* @var $entity \SAMLIDP */
+		/** @var \SAMLIDP $entity */
 		foreach ($entities as $entity) {
 			if (!$entity->showOnLoginForm()) {
 				continue;

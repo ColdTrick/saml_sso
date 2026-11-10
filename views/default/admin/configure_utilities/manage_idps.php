@@ -18,7 +18,7 @@ elgg_register_menu_item('title', ElggMenuItem::factory([
 
 echo elgg_list_entities([
 	'type' => 'object',
-	'subtype' => 'saml_idp',
+	'subtype' => \SAMLIDP::SUBTYPE,
 	'limit' => false,
 	'no_results' => true,
 ]);

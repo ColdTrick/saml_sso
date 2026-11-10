@@ -20,6 +20,7 @@ class SSO {
 	 * @throws HttpException
 	 */
 	public function __invoke(Request $request) {
+		/** @var \SAMLIDP $entity */
 		$entity = $request->getEntityParam();
 
 		elgg_entity_gatekeeper($entity->guid, 'object', \SAMLIDP::SUBTYPE);
