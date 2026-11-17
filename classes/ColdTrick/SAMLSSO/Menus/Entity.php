@@ -29,7 +29,9 @@ class Entity {
 			'name' => 'edit',
 			'icon' => 'edit',
 			'text' => elgg_echo('edit'),
-			'href' => elgg_http_add_url_query_elements('ajax/form/saml_sso/edit_idp', [
+			'href' => elgg_generate_url('ajax', [
+				'type' => 'form',
+				'segments' => 'saml_sso/edit_idp',
 				'guid' => $entity->guid,
 			]),
 			'link_class' => 'elgg-lightbox',
