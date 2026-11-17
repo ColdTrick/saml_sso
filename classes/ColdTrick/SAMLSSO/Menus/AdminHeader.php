@@ -27,7 +27,9 @@ class AdminHeader {
 		$return[] = \ElggMenuItem::factory([
 			'name' => 'manage_idps',
 			'text' => elgg_echo('admin:configure_utilities:manage_idps'),
-			'href' => 'admin/configure_utilities/manage_idps',
+			'href' => elgg_generate_url('admin', [
+				'segments' => 'configure_utilities/manage_idps',
+			]),
 			'parent_name' => 'utilities',
 		]);
 		
